@@ -10,15 +10,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     writingBox.addEventListener("input", function() {
         let text = writingBox.value;
-
+    
         // Verificar si el texto excede el límite de palabras
         const words = text.split(/\s+/).filter(word => word.length > 0);
         if (words.length > maxWordCount) {
             // Si el texto excede el límite, eliminar las palabras adicionales
             const excessWords = words.slice(maxWordCount);
-            text = text.substring(0, text.lastIndexOf(excessWords[0]));
+            const excessText = excessWords.join(' ');
+            text = text.substring(0, text.lastIndexOf(excessText));
         }
-
+    
         // Actualizar el contenido del cuadro de texto con el texto modificado
         writingBox.value = text;
 
