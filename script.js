@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const analyzeButton = document.getElementById("analyzeButton");
     const errorContainer = document.getElementById("errorContainer");
     const levelContainer = document.getElementById("levelContainer");
+    const copyButton = document.getElementById("copyButton");
+    const copyMessage = document.getElementById("copyMessage");
     const maxWordCount = 240;
 
     writingBox.addEventListener("input", function() {
-        let text = writingBox.value.trim();
+        let text = writingBox.value;
 
         // Verificar si el texto excede el límite de palabras
         const words = text.split(/\s+/).filter(word => word.length > 0);
@@ -21,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         writingBox.value = text;
 
         // Actualizar el contador de palabras
-        const wordCountNumber = text.split(/\s+/).filter(word => word.length > 0).length;
+        const wordCountNumber = words.length;
         wordCount.textContent = `Word Count: ${wordCountNumber}`;
     });
 
@@ -29,6 +31,23 @@ document.addEventListener("DOMContentLoaded", function() {
         const text = writingBox.value.trim();
         evaluateLevel(text);
         checkGrammar(text);
+    });
+
+    copyButton.addEventListener("click", function() {
+        const textToCopy = writingBox.value;
+        
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                console.log('Text copied to clipboard');
+                copyMessage.style.display = "block";
+                setTimeout(() => {
+                    copyMessage.style.display = "none";
+                }, 2000); // Ocultar el mensaje después de 2 segundos
+            })
+            .catch(err => {
+                console.error('Could not copy text: ', err);
+                // Aquí puedes manejar errores si ocurrieron al copiar el texto
+            });
     });
 
     function checkGrammar(text) {

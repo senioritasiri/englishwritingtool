@@ -93,3 +93,8 @@ button:hover {
 #wordCount.warning {
     color: #ff0000;
 }
+
+.incorrect {
+    color: red;
+    font-weight: bold;
+}
