@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const analyzeButton = document.getElementById("analyzeButton");
     const errorContainer = document.getElementById("errorContainer");
     const levelContainer = document.getElementById("levelContainer");
-    const copyButton = document.getElementById("copyButton");
     const maxWordCount = 240;
 
     writingBox.addEventListener("input", function() {
@@ -30,20 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const text = writingBox.value.trim();
         evaluateLevel(text);
         checkGrammar(text);
-    });
-
-    copyButton.addEventListener("click", function() {
-        const textToCopy = writingBox.value;
-        
-        navigator.clipboard.writeText(textToCopy)
-            .then(() => {
-                console.log('Text copied to clipboard');
-                alert('Texto copiado');
-            })
-            .catch(err => {
-                console.error('Could not copy text: ', err);
-                // Aquí puedes manejar errores si ocurrieron al copiar el texto
-            });
     });
 
     function checkGrammar(text) {
